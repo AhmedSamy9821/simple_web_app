@@ -40,7 +40,7 @@ jobs:
     - name: GCP authenticate
       uses: 'google-github-actions/auth@v3'
       with:
-        project_id: '${{PROJECT_ID}}'
+        project_id: '${{ secrets.PROJECT_ID}}'
         workload_identity_provider: 'projects/460540992837/locations/global/workloadIdentityPools/terraform-simple-app-pool/providers/github-provider'
         service_account: terraform-sa@simple-web-app-473205.iam.gserviceaccount.com
         

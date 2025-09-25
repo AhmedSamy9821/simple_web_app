@@ -31,6 +31,8 @@ jobs:
       with:
         project_id: 'simple-web-app-473205'
         workload_identity_provider: 'projects/460540992837/locations/global/workloadIdentityPools/terraform-simple-app-pool pool/providers/github-provider'
+        token_format: access_token
+
 
     - name: setup-terraform
       uses: hashicorp/setup-terraform@v3

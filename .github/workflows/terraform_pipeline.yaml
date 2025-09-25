@@ -51,7 +51,7 @@ jobs:
     - name: setup-terraform
       uses: hashicorp/setup-terraform@v3
 
-    - name: Terraform Init
+    - name: terraform Init
       run: |
           pwd
           cd ./Terraform/

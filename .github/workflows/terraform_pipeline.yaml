@@ -49,10 +49,10 @@ jobs:
 
     - name: terraform Init
       run: |
-          cd ./terraform/
+          cd ./terraform/main
           terraform init -backend-config="../conf/${{inputs.env}}_backend.hcl" 
     
     - name: Terraform apply
       run: |
-          cd ./terraform/
+          cd ./terraform/main
           terraform apply   -var="project_id=${{secrets.PROJECT_ID}}" -var-file="../conf/${{inputs.env}}.tfvars" --auto-approve

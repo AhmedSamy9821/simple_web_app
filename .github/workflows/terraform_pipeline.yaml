@@ -43,7 +43,7 @@ jobs:
       with:
         project_id: '${{ PROJECT_ID }}'
         workload_identity_provider: '${{ TERRAFORM_WORKLOAD_IDENTITY_PROVIDER }}'
-        service_account: '${{ TERRAFORM_SA }}'
+        service_account: terraform-sa@simple-web-app-473205.iam.gserviceaccount.com
 
     
 

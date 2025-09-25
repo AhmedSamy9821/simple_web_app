@@ -29,7 +29,5 @@ resource "google_compute_instance" "default" {
     access_config {} # Needed to assign a public IP
   }
 
-  metadata = {
-    ssh-keys = "your-username:${file("~/.ssh/id_rsa.pub")}"
-  }
+  
 }

@@ -29,8 +29,8 @@ jobs:
     - name: GCP authenticate
       uses: 'google-github-actions/auth@v3'
       with:
-        project_id: '${{secrets.PROJECT_ID}}'
-        workload_identity_provider: '${{secrets.TERRAFORM_WORKLOAD_IDENTITY_PROVIDER}}'
+        project_id: 'simple-web-app-473205'
+        workload_identity_provider: 'projects/460540992837/locations/global/workloadIdentityPools/terraform-simple-app-pool pool/providers/github-provider'
 
     - name: setup-terraform
       uses: hashicorp/setup-terraform@v3

@@ -37,17 +37,13 @@ jobs:
         echo "Decoded claims:"
         echo $IDTOKEN | cut -d '.' -f2 | base64 -d 2>/dev/null | jq
 
-
     - name: GCP authenticate
       uses: 'google-github-actions/auth@v3'
       with:
         project_id: '${{ PROJECT_ID }}'
         workload_identity_provider: '${{ TERRAFORM_WORKLOAD_IDENTITY_PROVIDER }}'
         service_account: terraform-sa@simple-web-app-473205.iam.gserviceaccount.com
-
-    
-
-
+        
     - name: setup-terraform
       uses: hashicorp/setup-terraform@v3
 

@@ -10,7 +10,7 @@ on:
                     - prod
                     - stage
                     - dev
-                    - qa
+                    - uat
 
 jobs:
   build_infra:

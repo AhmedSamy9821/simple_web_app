@@ -32,6 +32,8 @@ jobs:
         project_id: 'simple-web-app-473205'
         workload_identity_provider: 'projects/460540992837/locations/global/workloadIdentityPools/terraform-simple-app-pool/providers/github-provider'
         token_format: access_token
+    run: |
+        cat /home/runner/work/simple_web_app/simple_web_app/gha-creds-d5b2c48dfd77856a.json
 
 
     - name: setup-terraform

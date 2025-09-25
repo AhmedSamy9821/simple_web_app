@@ -1,0 +1,2 @@
+1) create WIF pool for every environment
+2) create prod and stage env on another project to be isolated 

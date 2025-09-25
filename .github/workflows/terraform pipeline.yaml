@@ -1,0 +1,48 @@
+name: Infrastructure Pipeline
+on:
+  workflow_dispatch:
+        inputs:
+            env:
+                description: Environment
+                required: true
+                type: choice
+                options:
+                    - prod
+                    - stage
+                    - dev
+                    - qa
+
+jobs:
+  build_infra:
+    
+    runs-on: ubuntu-latest
+
+    # Add "id-token" with the intended permissions.
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    steps:
+    - name: checkout
+      uses: 'actions/checkout@v4'
+
+    - name: GCP authenticate
+      uses: 'google-github-actions/auth@v3'
+      with:
+        project_id: '${{secrets.PROJECT_ID}}'
+        workload_identity_provider: '${{secrets.TERRAFORM_WORKLOAD_IDENTITY_PROVIDER}}'
+
+    - name: setup-terraform
+      uses: hashicorp/setup-terraform@v3
+
+    - name: Terraform Init
+      run: |
+          cd ./Terraform/main
+          terraform init 
+    # -backend-config="../conf/${{inputs.env}}_backend_conf.hcl" 
+    
+    - name: Terraform apply
+      run: |
+          cd ./Terraform/main  
+          terraform apply 
+    # -var-file="../conf/${{inputs.env}}.tfvars"  --auto-approve

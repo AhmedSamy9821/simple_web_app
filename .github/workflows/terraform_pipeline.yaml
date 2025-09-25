@@ -40,7 +40,10 @@ jobs:
 
     - name: GCP authenticate
       uses: 'google-github-actions/auth@v3'
-     
+      with:
+        project_id: 'simple-web-app-473205'
+        workload_identity_provider: 'projects/460540992837/locations/global/workloadIdentityPools/terraform-simple-app-pool/providers/github-provider'
+        service_account: terraform-sa@simple-web-app-473205.iam.gserviceaccount.com
 
     
 
@@ -50,6 +53,7 @@ jobs:
 
     - name: Terraform Init
       run: |
+          pwd
           cd ./Terraform/
           terraform init 
     # -backend-config="../conf/${{inputs.env}}_backend_conf.hcl" 

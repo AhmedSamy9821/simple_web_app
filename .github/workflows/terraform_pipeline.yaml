@@ -54,12 +54,12 @@ jobs:
     - name: terraform Init
       run: |
           pwd
-          cd ./Terraform/
+          cd ./terraform/
           terraform init 
     # -backend-config="../conf/${{inputs.env}}_backend_conf.hcl" 
     
     - name: Terraform apply
       run: |
-          cd ./Terraform/
-          terraform apply 
-    # -var-file="../conf/${{inputs.env}}.tfvars"  --auto-approve
+          cd ./terraform/
+          terraform apply  --auto-approve
+    # -var-file="../conf/${{inputs.env}}.tfvars" 

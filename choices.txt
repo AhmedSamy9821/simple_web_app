@@ -9,3 +9,12 @@ Authentication and authorization management: You have more granular control over
 Rotating credentials: With OIDC, your cloud provider issues a short-lived access token that is only valid for a single job, and then automatically expires.
 
 we can restrict the pool for only one workflow
+
+
+cloud storage for state file
+centeraliized , regional for cost , enable versioning
+
+
+
+cost:
+1) storage bucket for state file

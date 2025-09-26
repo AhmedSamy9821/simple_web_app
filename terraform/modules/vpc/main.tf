@@ -4,10 +4,6 @@ resource "google_compute_network" "vpc" {
   routing_mode            = "GLOBAL"
   description             = "${var.env} VPC"
 
-
-  labels = {
-    environment = var.env
-  }
 }
 
 resource "google_compute_subnetwork" "first_subnet" {
@@ -16,8 +12,4 @@ resource "google_compute_subnetwork" "first_subnet" {
   region        = var.region
   network       = google_compute_network.vpc.id
 
-
-  labels = {
-    environment = var.env
-  }
 }

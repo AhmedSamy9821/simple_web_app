@@ -1,21 +1,30 @@
 0) github actions: integration with github , can use oidc for auth, clear documentation 
 1) use Workload Identity Federation instead of service account keys to access Google Cloud resources with terraform - use direct access
-reason: However, service account keys are powerful credentials, and can present a security risk , WIF provide an OIDC token.
+reason: 
+a) However, service account keys are powerful credentials, and can present a security risk , WIF provide an OIDC token.
 Benefits of using OIDC
-By updating your workflows to use OIDC tokens, you can adopt the following good security practices:
 
-No cloud secrets: You won't need to duplicate your cloud credentials as long-lived GitHub secrets. Instead, you can configure the OIDC trust on your cloud provider, and then update your workflows to request a short-lived access token from the cloud provider through OIDC.
-Authentication and authorization management: You have more granular control over how workflows can use credentials, using your cloud provider's authentication (authN) and authorization (authZ) tools to control access to cloud resources.
-Rotating credentials: With OIDC, your cloud provider issues a short-lived access token that is only valid for a single job, and then automatically expires.
+b) By updating your workflows to use OIDC tokens, you can adopt the following good security practices:
+1)No cloud secrets: You won't need to duplicate your cloud credentials as long-lived GitHub secrets. Instead, you can configure the OIDC trust on your cloud provider, and then update your workflows to request a short-lived access token from the cloud provider through OIDC.
+2)Authentication and authorization management: You have more granular control over how workflows can use credentials, using your cloud provider's authentication (authN) and authorization (authZ) tools to control access to cloud resources.
+3)Rotating credentials: With OIDC, your cloud provider issues a short-lived access token that is only valid for a single job, and then automatically expires.
+4)we can restrict the pool for only one workflow
 
-we can restrict the pool for only one workflow
+
+2)cloud storage for state file
+reason: centeraliized , regional for cost , enable versioning
+
+3) region: i select all resources to be in the same region for fast connectivity (performance)
 
 
-cloud storage for state file
-centeraliized , regional for cost , enable versioning
+
 
 
 
 cost:
 1) storage bucket for state file
 2) storage bucket for all environment
+
+
+least previlige:
+1) terraform pipeline have editor role, but cicd not have editor role

@@ -2,6 +2,7 @@
 
 module "cloud_storage_bucket" {
   source      = "../modules/cloud_storage"
+  project_id = var.project_id
   env         = var.env
   region      = var.region
 }
@@ -10,6 +11,7 @@ module "cloud_storage_bucket" {
 
 module "vpc" {
     source  = "../modules/vpc"
+    project_id = var.project_id
     env         = var.env
     region      = var.region
     subnet_range = var.subnet_range

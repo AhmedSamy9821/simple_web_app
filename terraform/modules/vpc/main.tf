@@ -1,3 +1,10 @@
+#enable compute api to be able to create vpc
+resource "google_project_service" "compute_api" {
+  project = var.project_id
+  service = "compute.googleapis.com"
+  disable_on_destroy = false
+}
+
 resource "google_compute_network" "vpc" {
   name                    = "${var.env}-vpc"
   auto_create_subnetworks = false   # disables default subnetworks AND default firewall rules

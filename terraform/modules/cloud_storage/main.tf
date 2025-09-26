@@ -1,3 +1,10 @@
+#enable storage api 
+resource "google_project_service" "storage_api" {
+  project = var.project_id
+  service = "storage.googleapis.com"
+  disable_on_destroy = false
+}
+
 resource "google_storage_bucket" "simple_app_bucket" {
   name          = "${var.env}-simple_app_bucket"
   location      = var.region

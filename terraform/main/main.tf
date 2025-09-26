@@ -1,3 +1,4 @@
+/*
 # Cloud storage module
 
 module "cloud_storage_bucket" {
@@ -15,4 +16,4 @@ module "vpc" {
     env         = var.env
     region      = var.region
     subnet_range = var.subnet_range
-}
+}*/

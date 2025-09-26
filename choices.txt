@@ -18,3 +18,4 @@ centeraliized , regional for cost , enable versioning
 
 cost:
 1) storage bucket for state file
+2) storage bucket for all environment

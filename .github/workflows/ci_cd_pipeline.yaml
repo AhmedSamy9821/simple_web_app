@@ -28,7 +28,7 @@ jobs:
 
     - name: build image
       run: |
-        IMAGE=me-central1-docker.pkg.dev/${{ secrets.PROJECT_ID }}/simple-web-app/simple_app:v1"
+        IMAGE="me-central1-docker.pkg.dev/${{ secrets.PROJECT_ID }}/simple-web-app/simple_app:v1"
         docker build -t $IMAGE .
 
     - name: Push image

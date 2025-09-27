@@ -10,11 +10,11 @@ variable "env" {
 
 
 
-variables "vpc_name" {
+variable "vpc_name" {
   type = string
 }
 
-variables "first_subnet_name" {
+variable "first_subnet_name" {
   type = string
 }
 

@@ -63,7 +63,7 @@ resource "google_cloud_run_service" "simple-web-app" {
         }
       }
     }
-  }
+  
 
   # keep Terraform's traffic config simple (100% to latest revision)
   traffic {
@@ -79,3 +79,4 @@ resource "google_cloud_run_service" "simple-web-app" {
     ]
   }
 }
+  

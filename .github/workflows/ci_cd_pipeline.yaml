@@ -23,14 +23,14 @@ jobs:
         workload_identity_provider: '${{secrets.CI_CD_WORKLOAD_IDENTITY_PROVIDER}}'
         service_account: ${{secrets.CI_CD_SA}}
     - name: Configure docker for Artifact Registry
-        run: |
-          gcloud --quiet auth configure-docker me-central1-docker.pkg.dev
+      run: |
+        gcloud --quiet auth configure-docker me-central1-docker.pkg.dev
 
     - name: build image
-        run: |
-          IMAGE=me-central1-docker.pkg.dev/${{ secrets.PROJECT_ID }}/simple-web-app/simple_app:v1"
-          docker build -t $IMAGE .
-          
+      run: |
+        IMAGE=me-central1-docker.pkg.dev/${{ secrets.PROJECT_ID }}/simple-web-app/simple_app:v1"
+        docker build -t $IMAGE .
+
     - name: Push image
-        run: |
-          docker push $IMAGE
+      run: |
+        docker push $IMAGE

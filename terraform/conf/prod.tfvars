@@ -11,7 +11,7 @@ logging_bucket_class = "NEARLINE"
 #vpc variables
 vpc_name            = "prod-simple-web-app-vpc"
 first_subnet_name   = "prod-first-simple-web-app-subnet"
-subnet_range = "10.0.1.0/24"
+first_subnet_range = "10.0.1.0/24"
 
 
 

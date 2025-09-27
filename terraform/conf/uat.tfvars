@@ -12,4 +12,4 @@ logging_bucket_class = "NEARLINE"
 #vpc variables
 vpc_name            = "uat-simple-web-app-vpc"
 first_subnet_name   = "uat-first-simple-web-app-subnet"
-subnet_range = "10.0.3.0/24"
+first_subnet_range = "10.0.3.0/24"

@@ -87,3 +87,12 @@ resource "google_cloud_run_service" "simple-web-app" {
   }
 }
   
+#turn on Public access for all users to cloud run app
+resource "google_cloud_run_service_iam_member" "public_invoker" {
+  location = google_cloud_run_service.simple-web-app.location
+  project  = google_cloud_run_service.simple-web-app.project
+  service  = google_cloud_run_service.simple-web-app.name
+
+  role   = "roles/run.invoker"
+  member = "allUsers"
+}

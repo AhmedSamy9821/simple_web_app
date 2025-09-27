@@ -37,7 +37,7 @@ module "logs_bucket" {
 
 #Deploy cloud run service
 
-module "cloud run service" {
+module "cloud_run_service" {
   source      =  "../modules/cloud_run"
   project_id  = var.project_id
   env         = var.env

@@ -2,11 +2,10 @@
 FROM node:18-alpine AS builder
 WORKDIR /app
 COPY package*.json ./
-RUN npm ci --production=false
+RUN npm install
 COPY . .
-# no build step required for plain node app, but keep holes for future
 
-# runtime stage: distroless
+# runtime stage
 FROM node:18-alpine
 WORKDIR /app
 COPY --from=builder /app /app

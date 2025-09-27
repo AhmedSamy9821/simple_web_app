@@ -31,5 +31,13 @@ cost:
 
 
 least previlige:
-1) terraform pipeline have editor role, but cicd not have editor role
-2) cloud run serviceAccount has only objectCreator to assets bucket
+1) terraform pipeline serviceAccount have editor role,cloud run admin role(for enable public access)
+2) cicd roles
+roles/artifactregistry.writer (push images) OR roles/storage.admin if using GCR and docker push.
+roles/run.admin (deploy/modify Cloud Run services).
+3) cloud run serviceAccount has only objectCreator to assets bucket
+
+
+steps:
+1) create repo on artifact registry for the image with name simple-web-app
+2) create wif for cicd

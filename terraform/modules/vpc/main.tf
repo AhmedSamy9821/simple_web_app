@@ -6,17 +6,16 @@ resource "google_project_service" "compute_api" {
 }
 
 resource "google_compute_network" "vpc" {
-  name                    = "${var.env}-vpc"
+  name                    = var.vpc_name
   auto_create_subnetworks = false   # disables default subnetworks AND default firewall rules
   routing_mode            = "GLOBAL"
-  description             = "${var.env} VPC"
 
 }
 
 resource "google_compute_subnetwork" "first_subnet" {
-  name          = "first-${var.env}-subnet"
-  ip_cidr_range = var.subnet_range
-  region        = var.region
+  name          = var.first_subnet_name
+  ip_cidr_range = var.first_subnet_range
+  region        = var.first_subnet_region
   network       = google_compute_network.vpc.id
 
 }

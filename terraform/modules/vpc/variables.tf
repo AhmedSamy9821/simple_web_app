@@ -9,10 +9,21 @@ variable "env" {
 }
 
 
-variable "region" {
+
+variables "vpc_name" {
   type = string
 }
-variable "subnet_range" {
+
+variables "first_subnet_name" {
+  type = string
+}
+
+
+variable "first_subnet_region" {
+  type = string
+}
+
+variable "first_subnet_range" {
   type = string
 }
 

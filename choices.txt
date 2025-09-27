@@ -16,7 +16,9 @@ reason: centeraliized , regional for cost , enable versioning
 
 3) region: i select all resources to be in the same region for fast connectivity (performance)
 
-
+4) cloud storage
+    assets: STANDARD as this bucket will be accessed frequently
+    logging: NEARLINE as this bucket will be accessed rarely as it  audit/compliance 
 
 
 

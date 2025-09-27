@@ -35,3 +35,17 @@ module "logs_bucket" {
   class       = var.logging_bucket_class
 }
 
+#Deploy cloud run service
+
+module "cloud run service" {
+  source      =  "../modules/cloud_run"
+  project_id  = var.project_id
+  env         = var.env
+  region      = var.region
+  service_name = var.cloud_run_service_name
+  assets_bucket_name = var.assets_bucket_name
+  min_scale   = var.cloud_run_min_instances
+  max_scale   =  var.cloud_run_max_instances
+  started_image = var.cloud_run_started_image
+  port        = var.cloud_run_port
+}

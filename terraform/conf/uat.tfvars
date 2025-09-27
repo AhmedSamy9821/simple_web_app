@@ -13,3 +13,10 @@ logging_bucket_class = "NEARLINE"
 vpc_name            = "uat-simple-web-app-vpc"
 first_subnet_name   = "uat-first-simple-web-app-subnet"
 first_subnet_range = "10.0.3.0/24"
+
+#cloud run variables
+cloud_run_service_name = "uat-simple-web-app"
+cloud_run_min_instances = "0"
+cloud_run_max_instances = "10"
+cloud_run_started_image = "us-docker.pkg.dev/cloudrun/container/hello"
+cloud_run_port          = "8080"

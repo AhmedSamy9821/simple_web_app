@@ -13,4 +13,10 @@ vpc_name            = "stage-simple-web-app-vpc"
 first_subnet_name   = "stage-first-simple-web-app-subnet"
 first_subnet_range = "10.0.2.0/24"
 
+#cloud run variables
+cloud_run_service_name = "stage-simple-web-app"
+cloud_run_min_instances = "1"
+cloud_run_max_instances = "10"
+cloud_run_started_image = "us-docker.pkg.dev/cloudrun/container/hello"
+cloud_run_port          = "8080"
 

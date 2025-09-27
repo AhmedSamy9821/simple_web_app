@@ -1,0 +1,81 @@
+#This module for creating cloud run 
+
+#enable mandatory apis for cloud run 
+resource "google_project_services" "cloud_run_apis" {
+  project  = var.project_id
+  services = [
+    "run.googleapis.com",              # Cloud Run
+    "iam.googleapis.com",              # IAM
+    "logging.googleapis.com",          # Cloud Logging
+    "monitoring.googleapis.com",       # Cloud Monitoring
+    "compute.googleapis.com",          # VPC / Load Balancing
+    "artifactregistry.googleapis.com", # Container images
+  ]
+
+  disable_on_destroy = false
+}
+
+#create service account which be able to upload to assets bucket
+resource "google_service_account" "cloud_run_sa" {
+  account_id   = "${var.env}-cloud-run-sa"
+  display_name = "${var.env} Cloud Run Service Account"
+}
+
+#grant the cloud run service account only storage objectCreator for least previlige
+resource "google_storage_bucket_iam_member" "bucket_writer" {
+  bucket = var.assets_bucket_name
+  role   = "roles/storage.objectCreator"
+  member = "serviceAccount:${google_service_account.cloud_run_sa.email}"
+}
+
+#cloud run service
+resource "google_cloud_run_service" "simple-web-app" {
+  name     = var.service_name
+  location = var.region
+  project  = var.project_id
+
+  template {
+    metadata {
+      annotations = {
+        "autoscaling.knative.dev/minScale" = var.min_scale
+        "autoscaling.knative.dev/maxScale" = var.max_scale
+        }
+    labels = {
+    environment = var.env
+        }
+
+    }
+    }
+
+    spec {
+      service_account_name = google_service_account.cloud_run_sa.email
+
+      containers {
+        image = var.started_image
+
+        ports {
+          container_port = var.port
+        }
+
+        env {
+          name  = "ASSETS_BUCKET"
+          value = var.assets_bucket_name
+        }
+      }
+    }
+  }
+
+  # keep Terraform's traffic config simple (100% to latest revision)
+  traffic {
+    percent         = 100
+    latest_revision = true
+  }
+
+  lifecycle {
+    # ignore image changes and traffic so CD can update them without TF trying to revert
+    ignore_changes = [
+      "template[0].spec[0].containers[0].image",
+      "traffic"
+    ]
+  }
+}

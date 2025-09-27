@@ -55,3 +55,33 @@ variable "logging_bucket_name" {
 variable "logging_bucket_class" {
   type = string
 }
+
+
+#cloud run variables
+####################
+variable "cloud_run_service_name" {
+  type = string
+}
+
+
+variable "cloud_run_min_instances" {
+  description = "The minimum number of instances that up even there is no traffic"
+  type = string
+}
+
+variable "cloud_run_max_instances" {
+  description = "The max number of instances"
+  type = string
+}
+
+variable "cloud_run_started_image" {
+  description = "The first image will be deployed on the cloud run service" #will be changed by cicd pipeline
+  type = string
+}
+
+
+variable "cloud_run_port" {
+  description = "Container port" #will be changed by cicd pipeline
+  type = string
+}
+

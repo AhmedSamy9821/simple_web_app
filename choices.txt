@@ -20,13 +20,16 @@ reason: centeraliized , regional for cost , enable versioning
     assets: STANDARD as this bucket will be accessed frequently
     logging: NEARLINE as this bucket will be accessed rarely as it  audit/compliance 
 
-
+5) cloud run
+a) min scale instances is 0 on dev and test env to reduce cost but it is 1 on prod and stage to prevent cold start
+b) we use lifecycle block on cloud run to ignore changes on image and traffic to control it with cicd pipeline to achieve Rolling updates or blue-green deployment staratigy
 
 
 cost:
 1) storage bucket for state file
-2) storage bucket for all environment
+2) storage bucket(assets-logging) for all environment
 
 
 least previlige:
 1) terraform pipeline have editor role, but cicd not have editor role
+2) cloud run serviceAccount has only objectCreator to assets bucket

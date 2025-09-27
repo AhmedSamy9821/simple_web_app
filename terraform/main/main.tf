@@ -15,7 +15,7 @@ module "vpc" {
 
 #Create assets cloud storage bucket
 
-module "cloud_storage_bucket" {
+module "assets_bucket" {
   source      = "../modules/cloud_storage"
   project_id = var.project_id
   env         = var.env
@@ -26,7 +26,7 @@ module "cloud_storage_bucket" {
 
 #create logging cloud storage bucket
 
-module "cloud_storage_bucket" {
+module "logs_bucket" {
   source      = "../modules/cloud_storage"
   project_id = var.project_id
   env         = var.env

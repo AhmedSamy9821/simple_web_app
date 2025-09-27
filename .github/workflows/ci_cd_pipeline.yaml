@@ -36,3 +36,11 @@ jobs:
       run: |
         IMAGE="me-central1-docker.pkg.dev/${{ secrets.PROJECT_ID }}/simple-web-app/simple_app:v1"
         docker push $IMAGE
+
+    - name: Deploy new image to Cloud Run
+      run: |
+        IMAGE="me-central1-docker.pkg.dev/${{ secrets.PROJECT_ID }}/simple-web-app/simple_app:v1"
+        gcloud run services update dev-simple-web-app \
+        --image=$IMAGE \
+        --region="me-central1" \
+        --project=${{ secrets.PROJECT_ID }}

@@ -45,11 +45,5 @@ variable "port" {
 }
 
 
-variable "port" {
-  description = "Container port" #will be changed by cicd pipeline
-  type = string
-}
-
-
 
 

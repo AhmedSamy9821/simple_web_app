@@ -1,19 +1,25 @@
 #This module for creating cloud run 
 
 #enable mandatory apis for cloud run 
-resource "google_project_services" "cloud_run_apis" {
-  project  = var.project_id
-  services = [
-    "run.googleapis.com",              # Cloud Run
-    "iam.googleapis.com",              # IAM
-    "logging.googleapis.com",          # Cloud Logging
-    "monitoring.googleapis.com",       # Cloud Monitoring
-    "compute.googleapis.com",          # VPC / Load Balancing
-    "artifactregistry.googleapis.com", # Container images
+locals {
+  apis = [
+    "run.googleapis.com",
+    "iam.googleapis.com",
+    "logging.googleapis.com",
+    "monitoring.googleapis.com",
+    "compute.googleapis.com",
+    "artifactregistry.googleapis.com",
   ]
+}
+
+resource "google_project_service" "enabled" {
+  for_each = toset(local.apis)
+  project  = var.project_id
+  service  = each.key
 
   disable_on_destroy = false
 }
+
 
 #create service account which be able to upload to assets bucket
 resource "google_service_account" "cloud_run_sa" {
@@ -45,8 +51,6 @@ resource "google_cloud_run_service" "simple-web-app" {
         }
 
     }
-    }
-
     spec {
       service_account_name = google_service_account.cloud_run_sa.email
 
@@ -63,6 +67,9 @@ resource "google_cloud_run_service" "simple-web-app" {
         }
       }
     }
+    }
+
+    
   
 
   # keep Terraform's traffic config simple (100% to latest revision)

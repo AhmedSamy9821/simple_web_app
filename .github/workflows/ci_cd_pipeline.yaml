@@ -1,4 +1,4 @@
-name: Infrastructure Pipeline
+name: CI_CD Pipeline
 on:
   push:
     branches:

@@ -47,7 +47,7 @@ resource "google_monitoring_alert_policy" "cpu_high" {
       duration        = "120s"
       aggregations {
         alignment_period   = "60s"
-        per_series_aligner = "ALIGN_MEAN"
+        per_series_aligner = "ALIGN_PERCENTILE_99"
       }
     }
   }
@@ -68,7 +68,7 @@ resource "google_monitoring_alert_policy" "memory_high" {
       duration        = "120s"
       aggregations {
         alignment_period   = "60s"
-        per_series_aligner = "ALIGN_MEAN"
+        per_series_aligner = "ALIGN_PERCENTILE_99"
       }
     }
   }

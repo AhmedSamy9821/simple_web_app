@@ -36,7 +36,7 @@
           document.getElementById("status").innerText = "Error: " + text;
         } else {
           const data = await response.json();
-          document.getElementById("status").innerHTML = `✅ Uploaded! <a href="${data.url}" target="_blank">View File</a>`;
+          document.getElementById("status").innerHTML = `✅ Uploaded!`;
         }
       } catch (err) {
         document.getElementById("status").innerText = "Error: " + err.message;

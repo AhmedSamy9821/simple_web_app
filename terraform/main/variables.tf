@@ -36,7 +36,7 @@ variable "first_subnet_range" {
 }
 
 
-#storage buckets variables 
+#asstes bucket variables 
 ############################
 
 variable "assets_bucket_name" {
@@ -44,15 +44,6 @@ variable "assets_bucket_name" {
 }
 
 variable "assets_bucket_class" {
-  type = string
-}
-
-
-variable "logging_bucket_name" {
-  type = string
-}
-
-variable "logging_bucket_class" {
   type = string
 }
 

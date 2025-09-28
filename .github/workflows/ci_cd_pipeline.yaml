@@ -48,7 +48,7 @@ jobs:
         docker push $IMAGE
 
 
-Deploy:
+  Deploy:
     
     runs-on: ubuntu-latest
 

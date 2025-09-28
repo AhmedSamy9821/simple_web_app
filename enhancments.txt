@@ -1,3 +1,3 @@
 1) create WIF pool for every environment
 2) create prod and stage env on another project to be isolated 
-3) create branch for each environment and create seperate cicd pipeline for each environment which triggered on push to this branch
+3) create branch for each environment and create seperate cicd pipeline for each environment which triggered on push to this branch and add automation testing pipeline on test branch

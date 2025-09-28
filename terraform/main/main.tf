@@ -49,13 +49,14 @@ module "monitoring" {
   notification_email      = var.notification_email
 }
 
-#create logging cloud storage bucket
-
-module "logs_bucket" {
-  source      = "../modules/cloud_storage"
-  project_id = var.project_id
+#export logs to cloud storage bucket
+module "logging_export" {
+  source      = "../modules/logging_export"
+  project_id  = var.project_id
   env         = var.env
   region      = var.region
-  bucket_name = var.logging_bucket_name
-  class       = var.logging_bucket_class
+  bucket_name = var.logs_bucket_name
+  class       = var.logs_bucket_class
+  filter      = var.logs_sink_filter
 }
+

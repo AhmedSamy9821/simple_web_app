@@ -95,4 +95,17 @@ variable "notification_email" {
   type        = string
 }
 
+variable "logs_bucket_name" {
+  type        = string
+}
+
+variable "logs_bucket_class" {
+  type = string
+}
+
+variable "logs_sink_filter" {
+  type = string
+}
+
+
 

@@ -23,4 +23,8 @@ cloud_run_port          = "8080"
 
 #monitor and logging variables
 notification_email  = "ahmed.sami2321998@gmail.com"
+logs_bucket_name    = "prod-logging-simple-web-app"
+logs_bucket_class   = "NEARLINE"
+logs_sink_filter    = "resource.type=\"cloud_run_revision\" AND resource.labels.service_name=\"prod-simple-web-app""
+
 

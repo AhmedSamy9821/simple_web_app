@@ -26,6 +26,11 @@ app.get('/health', (req, res) => {
   res.json({ status: 'ok', ts: nowIso() }); 
 }); 
 
+// 👉 NEW: serve upload.html on GET /upload
+app.get('/upload', (req, res) => { 
+  res.sendFile(path.join(__dirname, '..', 'public', 'upload.html')); 
+}); 
+
 // POST /upload with form field "file" 
 app.post('/upload', upload.single('file'), async (req, res) => { 
   try { 

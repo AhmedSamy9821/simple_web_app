@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Upload to Cloud Storage</title>
+</head>
+<body>
+  <h1>Upload a File</h1>
+  <form id="uploadForm">
+    <input type="file" name="file" id="fileInput" />
+    <button type="submit">Upload</button>
+  </form>
+
+  <p id="status"></p>
+
+  <script>
+    document.getElementById("uploadForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const fileInput = document.getElementById("fileInput");
+      if (!fileInput.files.length) {
+        alert("Please select a file");
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append("file", fileInput.files[0]);
+
+      try {
+        const response = await fetch("/upload", {
+          method: "POST",
+          body: formData
+        });
+
+        if (!response.ok) {
+          const text = await response.text();
+          document.getElementById("status").innerText = "Error: " + text;
+        } else {
+          const data = await response.json();
+          document.getElementById("status").innerHTML = `✅ Uploaded! <a href="${data.url}" target="_blank">View File</a>`;
+        }
+      } catch (err) {
+        document.getElementById("status").innerText = "Error: " + err.message;
+      }
+    });
+  </script>
+</body>
+</html>

@@ -82,9 +82,13 @@ cloud_run_min_instances = "<min-instances>"
 cloud_run_max_instances = "<max-instances>"
 cloud_run_started_image = "<started-image>"
 cloud_run_port          = "<port>"
+
+# Load Balancer
+lb_domain_name = "<domain-name>"
 ```
 
 > **Note:** The VPC and subnet created by Terraform can be used in the future to connect your Cloud Run service to Cloud Storage privately via **Serverless VPC Access**, enabling secure communication without exposing the traffic to the public internet.
+> Terraform will also create an HTTP Load Balancer with the specified domain name that routes traffic to the Cloud Run service.
 
 3. **Deploy infrastructure with Terraform**
 
@@ -95,6 +99,7 @@ cloud_run_port          = "<port>"
      * GCS assets bucket
      * Logging and monitoring resources
      * VPC and subnet for potential private connections
+     * HTTP Load Balancer with the specified domain pointing to Cloud Run
 
 4. **Build and deploy app via CI/CD**
 
@@ -120,6 +125,9 @@ cloud_run_port          = "<port>"
 * **Cloud Run instances**:
 
   * Configure **min/max instances** in `.tfvars` per environment.
+* **Load Balancer**:
+
+  * Domain name and routing managed by Terraform, automatically forwarding traffic to Cloud Run.
 
 ---
 

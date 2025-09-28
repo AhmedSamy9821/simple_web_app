@@ -18,3 +18,7 @@ variable "class" {
   type = string
   description = "the bucket class"
 }
+
+variable "filter" {
+    type = string
+}

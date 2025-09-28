@@ -5,8 +5,7 @@ region = "me-central1"
 #buckets variables
 assets_bucket_name = "stage-assets-simple-web-app"
 assets_bucket_class = "STANDARD"
-logging_bucket_name = "stage-logging-simple-web-app"
-logging_bucket_class = "NEARLINE"
+
 
 # vpc variables
 vpc_name            = "stage-simple-web-app-vpc"
@@ -25,5 +24,5 @@ cloud_run_port          = "8080"
 notification_email  = "ahmedsami2302@gmail.com"
 logs_bucket_name    = "stage-logging-simple-web-app"
 logs_bucket_class   = "NEARLINE"
-logs_sink_filter    = "resource.type=\"cloud_run_revision\" AND resource.labels.service_name=\"stage-simple-web-app""
+logs_sink_filter    = "resource.type=\"cloud_run_revision\" AND resource.labels.service_name=\"stage-simple-web-app\""
 

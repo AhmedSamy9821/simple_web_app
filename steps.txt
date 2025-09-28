@@ -1,2 +1,0 @@
-1) create wif
-2) github secrets

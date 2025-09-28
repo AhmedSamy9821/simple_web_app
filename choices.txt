@@ -23,21 +23,24 @@ reason: centeraliized , regional for cost , enable versioning
 5) cloud run
 a) min scale instances is 0 on dev and test env to reduce cost but it is 1 on prod and stage to prevent cold start
 b) we use lifecycle block on cloud run to ignore changes on image and traffic to control it with cicd pipeline to achieve Rolling updates or blue-green deployment staratigy
+c) i used blue-green deployment staratigy on the app deploy but we can use rolling update using traffic splitting as we can Start with 10% to the new revision Then, after monitoring metrics/logs → increase the percentage gradually on another jobs
 
 
 cost:
 1) storage bucket for state file
 2) storage bucket(assets-logging) for all environment
+3) cloud run service
 
 
 least previlige:
 1) terraform pipeline serviceAccount have editor role,cloud run admin role(for enable public access)
 2) cicd roles
-roles/artifactregistry.writer (push images) OR roles/storage.admin if using GCR and docker push.
-roles/run.admin (deploy/modify Cloud Run services).
+roles/artifactregistry.writer (push images) .
+roles/run.developer allows updating/deploying Cloud Run services.
+roles/iam.serviceAccountUser to be able to run as a cloud run serviceAccount
 3) cloud run serviceAccount has only objectCreator to assets bucket
 
 
 steps:
 1) create repo on artifact registry for the image with name simple-web-app
-2) create wif for cicd
+2) create wif for cicd with the least previlige permission

@@ -1,9 +1,19 @@
 name: CI_CD Pipeline
 on:
-  workflow_dispatch:  
+  workflow_dispatch:
+        inputs:
+            env:
+                description: Environment
+                required: true
+                type: choice
+                options:
+                    - prod
+                    - stage
+                    - dev
+                    - uat 
 
 jobs:
-  build:
+  Build:
     
     runs-on: ubuntu-latest
 
@@ -37,10 +47,31 @@ jobs:
         IMAGE="me-central1-docker.pkg.dev/${{ secrets.PROJECT_ID }}/simple-web-app/simple_app:v1"
         docker push $IMAGE
 
+
+Deploy:
+    
+    runs-on: ubuntu-latest
+
+    # Add "id-token" with the intended permissions.
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    steps:
+    - name: checkout
+      uses: 'actions/checkout@v4'
+
+    - name: GCP authenticate
+      uses: 'google-github-actions/auth@v3'
+      with:
+        project_id: '${{secrets.PROJECT_ID}}'
+        workload_identity_provider: '${{secrets.CI_CD_WORKLOAD_IDENTITY_PROVIDER}}'
+        service_account: ${{secrets.CI_CD_SA}}
+
     - name: Deploy new image to Cloud Run
       run: |
         IMAGE="me-central1-docker.pkg.dev/${{ secrets.PROJECT_ID }}/simple-web-app/simple_app:v1"
-        gcloud run services update dev-simple-web-app \
+        gcloud run services update ${{inputs.env}}-simple-web-app \
         --image=$IMAGE \
         --region="me-central1" \
         --project=${{ secrets.PROJECT_ID }}

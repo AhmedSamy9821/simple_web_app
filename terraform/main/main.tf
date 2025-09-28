@@ -1,4 +1,4 @@
-/*
+
 #create network ( vpc , subnet , firewall rules)
 
 module "vpc" {
@@ -24,16 +24,6 @@ module "assets_bucket" {
   class       = var.assets_bucket_class
 }
 
-#create logging cloud storage bucket
-
-module "logs_bucket" {
-  source      = "../modules/cloud_storage"
-  project_id = var.project_id
-  env         = var.env
-  region      = var.region
-  bucket_name = var.logging_bucket_name
-  class       = var.logging_bucket_class
-}
 
 #Deploy cloud run service
 
@@ -49,4 +39,23 @@ module "cloud_run_service" {
   started_image = var.cloud_run_started_image
   port        = var.cloud_run_port
 }
-*/
+
+
+
+module "monitoring" {
+  source                  = "../modules/monitor"
+  cloud_run_service_name  = var.cloud_run_service_name
+  cloud_run_max_instances = var.cloud_run_max_instances
+  notification_email      = var.notification_email
+}
+
+#create logging cloud storage bucket
+
+module "logs_bucket" {
+  source      = "../modules/cloud_storage"
+  project_id = var.project_id
+  env         = var.env
+  region      = var.region
+  bucket_name = var.logging_bucket_name
+  class       = var.logging_bucket_class
+}

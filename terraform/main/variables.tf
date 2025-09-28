@@ -85,3 +85,14 @@ variable "cloud_run_port" {
   type = string
 }
 
+
+
+#monitoring and logging variables
+################################
+
+variable "notification_email" {
+  description = "Email address for alert notifications"
+  type        = string
+}
+
+

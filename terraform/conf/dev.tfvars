@@ -20,3 +20,6 @@ cloud_run_min_instances = "0"
 cloud_run_max_instances = "10"
 cloud_run_started_image = "us-docker.pkg.dev/cloudrun/container/hello"
 cloud_run_port          = "8080"
+
+#monitor and logging variables
+notification_email  = "ahmedsami2302@gmail.com"

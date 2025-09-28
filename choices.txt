@@ -38,6 +38,7 @@ least previlige:
 roles/artifactregistry.writer (push images) .
 roles/run.developer allows updating/deploying Cloud Run services.
 roles/iam.serviceAccountUser to be able to run as a cloud run serviceAccount
+roles/logging.configWriter to create log sink to cloud storag
 3) cloud run serviceAccount has only objectCreator to assets bucket
 
 

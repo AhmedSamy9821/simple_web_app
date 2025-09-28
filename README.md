@@ -24,7 +24,7 @@ Before deploying, make sure the following resources and accounts are prepared:
 
 | Service Account | Purpose                      | Required Roles                                                                         |
 | --------------- | ---------------------------- | -------------------------------------------------------------------------------------- |
-| Terraform SA    | Runs Terraform pipeline      | `roles/editor`, `roles/run.admin`                                                      |
+| Terraform SA    | Runs Terraform pipeline      | `roles/editor`, `roles/run.admin` , `roles/logging.configWriter`                                                     |
 | CI/CD SA        | Runs GitHub Actions pipeline | `roles/artifactregistry.writer`, `roles/run.developer`, `roles/iam.serviceAccountUser` |
 | Cloud Run SA    | Runtime of Cloud Run service | `roles/storage.objectCreator` (for uploading files to bucket)                          |
 

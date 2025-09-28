@@ -1,4 +1,4 @@
-
+/*
 #create network ( vpc , subnet , firewall rules)
 
 module "vpc" {
@@ -49,3 +49,4 @@ module "cloud_run_service" {
   started_image = var.cloud_run_started_image
   port        = var.cloud_run_port
 }
+*/

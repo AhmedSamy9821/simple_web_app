@@ -1,4 +1,4 @@
-
+/*
 #create network ( vpc , subnet , firewall rules)
 
 module "vpc" {
@@ -60,3 +60,4 @@ module "logging_export" {
   filter      = var.logs_sink_filter
 }
 
+*/

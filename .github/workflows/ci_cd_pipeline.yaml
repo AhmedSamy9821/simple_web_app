@@ -51,6 +51,7 @@ jobs:
   Deploy:
     
     runs-on: ubuntu-latest
+    needs: build
 
     # Add "id-token" with the intended permissions.
     permissions:

@@ -4,7 +4,7 @@
 
 The system is a simple, container-based web application deployed on **Google Cloud Run**, fronted by an **HTTP Load Balancer**, and integrated with **Cloud Storage** for asset uploads and **logging sinks**. Monitoring and alerting are managed via **Cloud Monitoring**. A **VPC** is provisioned for future integration with Cloud SQL or other private services.
 
-CI/CD pipelines are implemented using **GitHub Actions** and **Terraform**, with **Workload Identity Federation (WIF)** for secure authentication without long-lived service account keys.
+CI/CD and infrastructure pipelines are implemented using **GitHub Actions** and **Terraform**, with **Workload Identity Federation (WIF)** for secure authentication without long-lived service account keys.
 
 Cloud Run and the HTTP Load Balancer scale automatically based on demand, minimizing operational overhead for capacity planning.
 
@@ -53,8 +53,8 @@ Cloud Run and the HTTP Load Balancer scale automatically based on demand, minimi
 
 ```text
   ┌─────────────────────────────────────────────────────────────┐ 
-  │ GitHub Actions - Infra Pipeline                               │ 
-  │ (Provision / Manage GCP Infrastructure via Terraform)        │ 
+  │ GitHub Actions - Infra Pipeline                             │ 
+  │ (Provision / Manage GCP Infrastructure via Terraform)       │ 
   └─────────────┬───────────────────────────────────────────────┘ 
                 │ Step 1: Authenticate via Workload Identity Federation 
                 │ Step 2: Terraform applies infrastructure config 
@@ -78,8 +78,8 @@ Cloud Run and the HTTP Load Balancer scale automatically based on demand, minimi
 
 ```text
   ┌─────────────────────────────────────────────────────────────┐ 
-  │ GitHub Actions - CI/CD Pipeline                               │ 
-  │ (Build & Deploy App)                                         │ 
+  │ GitHub Actions - CI/CD Pipeline                             │ 
+  │ (Build & Deploy App)                                        │ 
   └─────────────┬───────────────────────────────────────────────┘ 
                 │ Step 1: Authenticate via Workload Identity Federation 
                 │ Step 2: Build Docker Image of App 

@@ -78,7 +78,11 @@ jobs:
       - name: Run container (smoke test)
         run: |
           IMAGE="me-central1-docker.pkg.dev/${{ secrets.PROJECT_ID }}/simple-web-app/simple_app:${{ github.sha }}"
-          docker run --rm -d --name smoke_test -p 8080:8080 $IMAGE
+          docker run --rm -d \
+            --name smoke_test \
+            -e ASSETS_BUCKET=dummy-bucket \
+            -p 8080:8080 $IMAGE
+
           for i in {1..12}; do
             echo "waiting for app to respond... attempt $i"
             STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8080/health || true)
@@ -88,6 +92,7 @@ jobs:
             fi
             sleep 5
           done
+
           STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8080/health || true)
           if [ "$STATUS" != "200" ]; then
             echo "Smoke test failed — final HTTP status: $STATUS"
@@ -95,6 +100,7 @@ jobs:
             docker stop smoke_test || true
             exit 1
           fi
+
           docker stop smoke_test || true
 
       - name: Cleanup (always)

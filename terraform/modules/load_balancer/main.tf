@@ -46,9 +46,9 @@ resource "google_compute_url_map" "url_map" {
 
    default_route_action {
     url_rewrite {
-      host_rewrite = "dev-simple-web-app-43fdj3nc6a-ww.a.run.app" #var.cloud_run_service_host
+      host_rewrite =  var.cloud_run_service_host
     }
-
+#"dev-simple-web-app-43fdj3nc6a-ww.a.run.app"
    }
 
   default_service = google_compute_backend_service.cloud_run_backend.self_link

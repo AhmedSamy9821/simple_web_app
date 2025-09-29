@@ -27,4 +27,4 @@ logs_sink_filter    = "resource.type=\"cloud_run_revision\" AND resource.labels.
 
 
 #load_balancer variables
-load_balancer_name = prod-simple-web-app-lb
+load_balancer_name = "prod-simple-web-app-lb"

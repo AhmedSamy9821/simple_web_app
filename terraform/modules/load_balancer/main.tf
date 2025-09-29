@@ -28,7 +28,7 @@ resource "google_compute_health_check" "health_check" {
   name = "${var.cloud_run_service}-hc"
 
   http_health_check {
-    port_specification = "8080"
+    port_specification = "USE_SERVING_PORT"
     request_path       = "/health"
   }
 

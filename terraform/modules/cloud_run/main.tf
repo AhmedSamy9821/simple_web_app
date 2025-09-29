@@ -81,8 +81,8 @@ resource "google_cloud_run_service" "simple-web-app" {
   lifecycle {
     # ignore image changes and traffic so CD can update them without TF trying to revert
     ignore_changes = [
-      "template[0].spec[0].containers[0].image",
-      "traffic"
+      template[0].spec[0].containers[0].image,
+      traffic
     ]
   }
 }

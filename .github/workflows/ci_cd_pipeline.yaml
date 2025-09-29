@@ -95,6 +95,8 @@ jobs:
             sleep 5
           done
 
+          docker ps -a
+
           STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8080/health || true)
           if [ "$STATUS" != "200" ]; then
             echo "Smoke test failed — final HTTP status: $STATUS"

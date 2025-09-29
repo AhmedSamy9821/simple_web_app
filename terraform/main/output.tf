@@ -1,4 +1,4 @@
-
+/*
 #cloud run module outputs
 output "cloud_run_url" {
     value = module.cloud_run_service.cloud_run_url
@@ -10,5 +10,5 @@ output "lb_url" {
   value       = module.load_balancer.lb_url
   description = "URL to access the load balancer"
 }
-
+*/
 

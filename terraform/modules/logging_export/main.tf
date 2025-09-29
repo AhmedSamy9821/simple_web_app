@@ -1,4 +1,4 @@
-#export logs to cloud storage
+#This module is for creating logging sink to export logs to cloud storage
 
 
 resource "google_storage_bucket" "logs_bucket" {
@@ -14,12 +14,14 @@ resource "google_storage_bucket" "logs_bucket" {
   }
 }
 
+#create sink to export logs from cloud run
 resource "google_logging_project_sink" "cloudrun_logs_sink" {
   name        = "${var.bucket_name}-sink"
   destination = "storage.googleapis.com/${google_storage_bucket.logs_bucket.name}"
   filter      = var.filter
 }
 
+#grant the logging sink permission to write on logging cloud storage bucket
 resource "google_storage_bucket_iam_member" "logs_sink_writer" {
   bucket = google_storage_bucket.logs_bucket.name
   role   = "roles/storage.objectCreator"

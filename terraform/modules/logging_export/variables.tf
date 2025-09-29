@@ -20,5 +20,6 @@ variable "class" {
 }
 
 variable "filter" {
-    type = string
+    description = "This filter will be used to filter cloud run logs to export them to logs cloud storage bucket"
+    type        = string
 }

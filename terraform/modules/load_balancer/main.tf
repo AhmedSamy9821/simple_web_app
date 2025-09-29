@@ -1,3 +1,6 @@
+#This module is for creating load balancer to redirect the traffic to cloud run
+#we can do some enhancement like adding a custom domain and ssl certificate
+
 # Serverless NEG for Cloud Run
 resource "google_compute_region_network_endpoint_group" "cloudrun_neg" {
   name                  = "${var.cloud_run_service}-neg"

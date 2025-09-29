@@ -1,6 +1,8 @@
 /*
-#create network ( vpc , subnet , firewall rules)
+#This is the root module 
 
+
+#create network ( vpc , subnet )
 module "vpc" {
     source  = "../modules/vpc"
     project_id = var.project_id
@@ -13,7 +15,7 @@ module "vpc" {
 
 
 
-#Create assets cloud storage bucket
+#Create assets cloud storage bucket to save the files uploaded on cloud run service
 
 module "assets_bucket" {
   source      = "../modules/cloud_storage"
@@ -25,7 +27,7 @@ module "assets_bucket" {
 }
 
 
-#Deploy cloud run service
+#Deploy cloud run service which will be the compute resource of the application
 
 module "cloud_run_service" {
   source      =  "../modules/cloud_run"
@@ -41,6 +43,7 @@ module "cloud_run_service" {
 }
 
 
+#create policy alerts to notify on notification channel and create monitoring dashboard
 
 module "monitoring" {
   source                  = "../modules/monitor"
@@ -49,7 +52,8 @@ module "monitoring" {
   notification_email      = var.notification_email
 }
 
-#export logs to cloud storage bucket
+
+#export cloud run logs to cloud storage bucket to save it for future auditing
 module "logging_export" {
   source      = "../modules/logging_export"
   project_id  = var.project_id
@@ -63,7 +67,8 @@ module "logging_export" {
 }
 
 
-#load balancer module
+# create load balancer to forward the traffic to cloud run
+# also we can use it for custom domain and ssl certificate and frwarding base on the path and subdomain
 module "load_balancer" {
 source              = "../modules/load_balancer"
 lb_name             = var.load_balancer_name

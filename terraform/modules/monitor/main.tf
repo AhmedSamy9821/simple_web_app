@@ -1,3 +1,5 @@
+#This module is to creatig alerts policies and monitoring dashboard
+
 locals {
   service_filter = "resource.type=\"cloud_run_revision\" AND resource.labels.service_name=\"${var.cloud_run_service_name}\""
 }
@@ -12,6 +14,7 @@ resource "google_monitoring_notification_channel" "email" {
 }
 
 /* 5xx Errors */
+#Error Rate High → Trigger if 5xx > 5% of requests for 5 minutes.
 resource "google_monitoring_alert_policy" "errors_5xx" {
   display_name          = "Cloud Run ${var.cloud_run_service_name} - High 5xx"
   notification_channels = [google_monitoring_notification_channel.email.id]
@@ -33,6 +36,7 @@ resource "google_monitoring_alert_policy" "errors_5xx" {
 }
 
 /* CPU */
+#CPU Utilization → Alert if > 80% for 10 minutes.
 resource "google_monitoring_alert_policy" "cpu_high" {
   display_name          = "Cloud Run ${var.cloud_run_service_name} - High CPU"
   notification_channels = [google_monitoring_notification_channel.email.id]
@@ -54,6 +58,7 @@ resource "google_monitoring_alert_policy" "cpu_high" {
 }
 
 /* Memory */
+#Memory Utilization → Alert if > 80% for 10 minutes.
 resource "google_monitoring_alert_policy" "memory_high" {
   display_name          = "Cloud Run ${var.cloud_run_service_name} - High Memory"
   notification_channels = [google_monitoring_notification_channel.email.id]
@@ -75,6 +80,7 @@ resource "google_monitoring_alert_policy" "memory_high" {
 }
 
 /* Latency */
+#Latency High → Trigger at 99th percentile > 500ms for 5 minutes.
 resource "google_monitoring_alert_policy" "latency_high" {
   display_name          = "Cloud Run ${var.cloud_run_service_name} - High Latency"
   notification_channels = [google_monitoring_notification_channel.email.id]
@@ -96,6 +102,7 @@ resource "google_monitoring_alert_policy" "latency_high" {
 }
 
 /* Instances >= 75% of max */
+#Instance Scaling → Alert if active instances ≥ 75% of max configured.
 resource "google_monitoring_alert_policy" "instances_high" {
   display_name          = "Cloud Run ${var.cloud_run_service_name} - High Instance Count"
   notification_channels = [google_monitoring_notification_channel.email.id]

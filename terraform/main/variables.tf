@@ -1,5 +1,3 @@
-# providers.tf variables
-########################
 
 
 # global variables
@@ -72,7 +70,7 @@ variable "cloud_run_started_image" {
 
 
 variable "cloud_run_port" {
-  description = "Container port" #will be changed by cicd pipeline
+  description = "Container port" 
   type = string
 }
 
@@ -95,6 +93,7 @@ variable "logs_bucket_class" {
 }
 
 variable "logs_sink_filter" {
+  description = "This filter will be used to filter cloud run logs to export them to logs cloud storage bucket"
   type = string
 }
 

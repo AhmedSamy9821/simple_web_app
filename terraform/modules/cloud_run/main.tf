@@ -1,4 +1,4 @@
-#This module for creating cloud run 
+#This module for creating cloud run  to host the app
 
 #enable mandatory apis for cloud run 
 locals {
@@ -21,7 +21,7 @@ resource "google_project_service" "enabled" {
 }
 
 
-#create service account which be able to upload to assets bucket
+#create cloud run service account to grant the cloud run permission to upload files to assets bucket
 resource "google_service_account" "cloud_run_sa" {
   account_id   = "${var.env}-cloud-run-sa"
   display_name = "${var.env} Cloud Run Service Account"
@@ -79,7 +79,7 @@ resource "google_cloud_run_service" "simple-web-app" {
   }
 
   lifecycle {
-    # ignore image changes and traffic so CD can update them without TF trying to revert
+    # ignore image changes and traffic so CD can update them without terraform trying to revert
     ignore_changes = [
       template[0].spec[0].containers[0].image,
       traffic

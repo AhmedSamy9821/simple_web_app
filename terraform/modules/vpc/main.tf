@@ -1,3 +1,6 @@
+#This module is for creating vpc and subnet
+#we can use it in future for connect cloud run to cloud sql securely
+
 #enable compute api to be able to create vpc
 resource "google_project_service" "compute_api" {
   project = var.project_id

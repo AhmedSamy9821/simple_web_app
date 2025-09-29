@@ -40,7 +40,7 @@ variable "started_image" {
 
 
 variable "port" {
-  description = "Container port" #will be changed by cicd pipeline
+  description = "Container port" 
   type = string
 }
 

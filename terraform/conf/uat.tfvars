@@ -27,3 +27,7 @@ logs_bucket_name    = "uat-logging-simple-web-app"
 logs_bucket_class   = "NEARLINE"
 logs_sink_filter    = "resource.type=\"cloud_run_revision\" AND resource.labels.service_name=\"uat-simple-web-app\""
 
+
+#load_balancer variables
+load_balancer_name = uat-simple-web-app-lb
+

@@ -1,4 +1,4 @@
-/*
+
 #create network ( vpc , subnet , firewall rules)
 
 module "vpc" {
@@ -33,7 +33,7 @@ module "cloud_run_service" {
   env         = var.env
   region      = var.region
   service_name = var.cloud_run_service_name
-  assets_bucket_name = var.assets_bucket_name
+  assets_bucket_name = module.assets_bucket.bucket_name
   min_scale   = var.cloud_run_min_instances
   max_scale   =  var.cloud_run_max_instances
   started_image = var.cloud_run_started_image
@@ -44,7 +44,7 @@ module "cloud_run_service" {
 
 module "monitoring" {
   source                  = "../modules/monitor"
-  cloud_run_service_name  = var.cloud_run_service_name
+  cloud_run_service_name  = module.cloud_run_service.cloud_run_service_name
   cloud_run_max_instances = var.cloud_run_max_instances
   notification_email      = var.notification_email
 }
@@ -58,6 +58,15 @@ module "logging_export" {
   bucket_name = var.logs_bucket_name
   class       = var.logs_bucket_class
   filter      = var.logs_sink_filter
+
+  depends_on = [module.cloud_run_service]
 }
 
-*/
+
+#load balancer module
+module "load_balancer" {
+source              = "../modules/load_balancer"
+lb_name             = var.load_balancer_name
+region              = var.region
+cloud_run_service   = module.cloud_run_service.cloud_run_service_name
+}

@@ -26,3 +26,6 @@ logs_bucket_name    = "stage-logging-simple-web-app"
 logs_bucket_class   = "NEARLINE"
 logs_sink_filter    = "resource.type=\"cloud_run_revision\" AND resource.labels.service_name=\"stage-simple-web-app\""
 
+
+#load_balancer variables
+load_balancer_name = stage-simple-web-app-lb

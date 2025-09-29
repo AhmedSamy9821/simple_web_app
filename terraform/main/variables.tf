@@ -99,4 +99,9 @@ variable "logs_sink_filter" {
 }
 
 
+#load_balancer variables     
+variable "load_balancer_name" {
+  type        = string
+}            
+
 

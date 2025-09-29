@@ -10,6 +10,6 @@ variable "cloud_run_service" {
     type = string
 }
 
-variable "cloud_run_url" {
+variable "cloud_run_service_host" {
     type = string
 }

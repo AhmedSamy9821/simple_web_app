@@ -69,5 +69,5 @@ source              = "../modules/load_balancer"
 lb_name             = var.load_balancer_name
 region              = var.region
 cloud_run_service   = module.cloud_run_service.cloud_run_service_name
-cloud_run_url       = module.cloud_run_service.cloud_run_url
+cloud_run_service_host       = module.cloud_run_service.service_host
 }

@@ -9,3 +9,7 @@ variable "region" {
 variable "cloud_run_service" {
     type = string
 }
+
+variable "cloud_run_url" {
+    type = string
+}

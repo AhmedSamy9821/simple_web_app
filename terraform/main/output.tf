@@ -1,12 +1,3 @@
-#vpc module outputs
-output "vpc_id" {
-  value       = module.vpc.vpc_id
-}
-
-output "first_subnet_state" {
-    value      = module.vpc.first_subnet_state
-}
-
 
 #cloud run module outputs
 output "cloud_run_url" {

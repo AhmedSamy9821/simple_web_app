@@ -40,6 +40,13 @@ resource "google_compute_health_check" "health_check" {
 # URL map
 resource "google_compute_url_map" "url_map" {
   name            = "${var.lb_name}-urlmap"
+
+   default_route_action {
+    url_rewrite {
+      host_rewrite = var.cloud_run_url
+    }
+   }
+
   default_service = google_compute_backend_service.cloud_run_backend.self_link
 }
 

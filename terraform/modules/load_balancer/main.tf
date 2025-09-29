@@ -20,7 +20,6 @@ resource "google_compute_backend_service" "cloud_run_backend" {
     group = google_compute_region_network_endpoint_group.cloudrun_neg.id
   }
 
-  health_checks = [google_compute_health_check.health_check.self_link]
 }
 
 # Health check

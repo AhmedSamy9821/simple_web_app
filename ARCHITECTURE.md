@@ -8,6 +8,102 @@ CI/CD pipelines are implemented using **GitHub Actions** and **Terraform**, with
 
 Cloud Run and the HTTP Load Balancer scale automatically based on demand, minimizing operational overhead for capacity planning.
 
+### High-Level Design
+
+```text
+                                ┌───────────────┐ 
+                                │    Users      │ 
+                                │ (Web / Mobile)│ 
+                                └───────┬───────┘ 
+                                        │ HTTP Requests 
+                                        ▼ 
+                        ┌───────────────────────────────┐ 
+                        │ Google Cloud Load Balancer    │ 
+                        │   (Global HTTP LB)            │ 
+                        └─────────────┬─────────────────┘ 
+                                      │ Routes Traffic 
+                                      ▼ 
+                        ┌───────────────────────────────┐ 
+                        │ Cloud Run Service             │ 
+                        │ "simple-web-app"              │ 
+                        │ (Stateless, Auto-Scaling)     │ 
+                        │ Blue-Green Deployment         │ 
+                        │ (100% traffic to new revision)│ 
+                        └─────────────┬─────────────────┘ 
+                                      │ 
+        ┌─────────────────────────────┼─────────────────────────────┐ 
+        │                             │                             │ 
+        ▼                             ▼                             ▼ 
+┌───────────────┐             ┌─────────────────┐            ┌───────────────────┐ 
+│ Cloud Storage │             │ Cloud Logging   │            │ Cloud Monitoring	 │ 
+│   "assets"    │             │ Sink → Bucket   │            │ Custom Dashboards │ 
+│(Uploaded Files)│            │ "logging"       │            │ & Metrics         │ 
+└───────────────┘             └─────────────────┘            └─────────┬─────────┘ 
+                                                                       │ 
+                                                                       ▼ 
+                                                           ┌────────────────┐ 
+                                                           │ Alert Policies │ 
+                                                           │  (Email Notifs)│ 
+                                                           └────────────────┘ 
+```
+
+---
+
+### Infrastructure Management Layer
+
+```text
+  ┌─────────────────────────────────────────────────────────────┐ 
+  │ GitHub Actions - Infra Pipeline                               │ 
+  │ (Provision / Manage GCP Infrastructure via Terraform)        │ 
+  └─────────────┬───────────────────────────────────────────────┘ 
+                │ Step 1: Authenticate via Workload Identity Federation 
+                │ Step 2: Terraform applies infrastructure config 
+                │ Step 3: Provision: 
+                │       - Cloud Run Service 
+                │       - Cloud Storage Buckets (assets, logging) 
+                │       - Logging Sink 
+                │       - Monitoring Dashboards & Alerts 
+                │       - VPC + Subnet (future Cloud SQL connectivity) 
+                ▼ 
+  ┌─────────────────────────────────────────────────────────────┐ 
+  │ Terraform Service Account (Least Privilege)                 │ 
+  │ - Only permissions required for provisioning infra          │ 
+  │ - Ensures secure and auditable infra changes                │ 
+  └─────────────────────────────────────────────────────────────┘ 
+```
+
+---
+
+### CI/CD Management Layer
+
+```text
+  ┌─────────────────────────────────────────────────────────────┐ 
+  │ GitHub Actions - CI/CD Pipeline                               │ 
+  │ (Build & Deploy App)                                         │ 
+  └─────────────┬───────────────────────────────────────────────┘ 
+                │ Step 1: Authenticate via Workload Identity Federation 
+                │ Step 2: Build Docker Image of App 
+                │ Step 3: Push Image to Artifact Registry ("simple-web-app") 
+                │ Step 4: Deploy new revision to Cloud Run 
+                │ Step 5: Switch 100% of traffic to new revision (Blue-Green) 
+                │ Step 6: Keep old revision available for rollback 
+                ▼ 
+  ┌─────────────────────────────────────────────────────────────┐ 
+  │ CI/CD Service Account (Least Privilege)                     │ 
+  │ - Build & push images                                       │ 
+  │ - Update Cloud Run revision with Blue-Green switch          │ 
+  └─────────────────────────────────────────────────────────────┘ 
+```
+
+---
+
+### Notes
+
+- **Security:** Both pipelines use Workload Identity Federation with least-privilege service accounts.  
+- **Scalability:** Cloud Run and Cloud Storage scale automatically.  
+- **Reliability:** Blue-Green deployment strategy ensures safe rollbacks.  
+- **Future Expansion:** VPC + Subnet provisioned for potential secure connection to Cloud SQL.
+
 ## Component Descriptions
 
 * **HTTP Load Balancer** → Provides a global, managed entry point for users, distributes traffic to Cloud Run. Scales automatically based on traffic demand.

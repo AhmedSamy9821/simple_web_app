@@ -45,7 +45,6 @@ resource "google_compute_url_map" "url_map" {
     url_rewrite {
       host_rewrite = "dev-simple-web-app-43fdj3nc6a-ww.a.run.app"
     }
-        path_prefix_rewrite = "/"
 
    }
 

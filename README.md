@@ -153,7 +153,7 @@ lb_domain_name = "<domain-name>"
 
 To avoid charges:
 
-1. Comment out the contents of `main.tf`:
+1. Comment out the contents of `main.tf` and `output.tf`:
 
 ```hcl
 /*

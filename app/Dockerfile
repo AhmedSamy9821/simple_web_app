@@ -25,3 +25,4 @@ EXPOSE 8080
 
 # Start the app
 CMD ["node", "src/index.js"]
+

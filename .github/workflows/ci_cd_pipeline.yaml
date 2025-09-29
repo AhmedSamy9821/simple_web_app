@@ -82,7 +82,11 @@ jobs:
             --name smoke_test \
             -e ASSETS_BUCKET=dummy-bucket \
             -p 8080:8080 $IMAGE
+          
+          docker ps -a
 
+          echo "⏳ Waiting 30s for container startup..."
+          sleep 30
           docker ps -a
 
           for i in {1..12}; do

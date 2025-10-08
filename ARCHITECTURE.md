@@ -159,8 +159,8 @@ Cloud Run and the HTTP Load Balancer scale automatically based on demand, minimi
 
 * **IAM Principles** → Strict least-privilege policies applied.
 
-  * **Terraform Pipeline Service Account** → `roles/editor`, `roles/run.admin` for infrastructure management.
-  * **CI/CD Service Account** → `roles/artifactregistry.writer`, `roles/run.developer`, `roles/iam.serviceAccountUser`, `roles/logging.configWriter`.
+  * **Terraform Pipeline Service Account** → `roles/editor`, `roles/run.admin`, `roles/logging.configWriter` for infrastructure management.
+  * **CI/CD Service Account** → `roles/artifactregistry.writer`, `roles/run.developer`, `roles/iam.serviceAccountUser`.
   * **Cloud Run Execution Service Account** → `roles/storage.objectCreator` on assets bucket only.
 
 * **Workload Identity Federation (WIF)** → Used for pipelines, restricted per workflow with attribute conditions to enhance security. **WIF removes the need for long-lived credentials**, improving security.

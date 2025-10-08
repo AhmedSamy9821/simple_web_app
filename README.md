@@ -87,7 +87,7 @@ cloud_run_port          = "<port>"
 lb_domain_name = "<domain-name>"
 ```
 
-> **Note:** The VPC and subnet created by Terraform can be used in the future to connect your Cloud Run service to Cloud Storage privately via **Serverless VPC Access**, enabling secure communication without exposing the traffic to the public internet.
+> **Note:** The VPC and subnet created by Terraform can be used in the future to connect your Cloud Run service to Cloud SQL privately via **Serverless VPC Access**, enabling secure communication without exposing the traffic to the public internet.
 > Terraform will also create an HTTP Load Balancer with the specified domain name that routes traffic to the Cloud Run service.
 
 3. **Deploy infrastructure with Terraform**
@@ -121,7 +121,7 @@ lb_domain_name = "<domain-name>"
   * `ASSETS_BUCKET` → name of the GCS bucket
 * **VPC / Serverless VPC Access (future use)**:
 
-  * Cloud Run can attach to the VPC/subnet via **Serverless VPC Connector** for private access to GCS or other resources.
+  * Cloud Run can attach to the VPC/subnet via **Serverless VPC Connector** for private access to Cloud SQL or other resources.
 * **Cloud Run instances**:
 
   * Configure **min/max instances** in `.tfvars` per environment.
